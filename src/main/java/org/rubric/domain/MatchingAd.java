@@ -26,8 +26,10 @@ public class MatchingAd {
 
     String title;
 
+    @Column(name = "price_from")
     BigDecimal priceFrom;
 
+    @Column(name = "price_to")
     BigDecimal priceTo;
 
     @ManyToOne

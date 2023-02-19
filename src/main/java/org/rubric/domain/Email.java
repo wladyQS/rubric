@@ -19,6 +19,9 @@ public class Email {
     @Column(name = "email_id")
     int id;
 
+    @Version
+    int version;
+
     @Column(name = "email_address")
     String emailAddress;
 }

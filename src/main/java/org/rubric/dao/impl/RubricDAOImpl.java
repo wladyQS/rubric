@@ -1,67 +1,46 @@
 package org.rubric.dao.impl;
 
 import org.rubric.dao.CrudDAO;
-import org.rubric.domain.Ad;
 import org.rubric.domain.Rubric;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
+@Repository
+@Transactional
 public class RubricDAOImpl implements CrudDAO<Rubric> {
-    public static final EntityManagerFactory FACTORY =
-            Persistence.createEntityManagerFactory("rubric");
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
     public void insert(Rubric rubric) {
-        EntityManager em = FACTORY.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
         em.persist(rubric);
-        transaction.commit();
-        em.close();
     }
 
     @Override
     public Rubric findById(int id) {
-        EntityManager em = FACTORY.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        Rubric rubric = em.find(Rubric.class, id);
-        transaction.commit();
-        em.close();
-        return rubric;
+        return em.find(Rubric.class, id);
     }
 
     @Override
     public void update(Rubric rubric) {
-        EntityManager em = FACTORY.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
         Rubric mergedRubric = em.merge(rubric);
         em.persist(mergedRubric);
-        transaction.commit();
-        em.close();
     }
 
     @Override
     public void deleteById(int id) {
-        EntityManager em = FACTORY.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
         em.remove(em.find(Rubric.class, id));
-        transaction.commit();
-        em.close();
     }
 
     @Override
     public List<Rubric> findAll() {
-        EntityManager em = FACTORY.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
         TypedQuery<Rubric> query = em.createQuery("SELECT r FROM Rubric r", Rubric.class);
-        List<Rubric> rubrics = query.getResultList();
-        transaction.commit();
-        em.close();
-        return rubrics;
+        return query.getResultList();
     }
 }

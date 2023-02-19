@@ -1,19 +1,21 @@
 package org.rubric.service.impl;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.rubric.dao.CrudDAO;
 import org.rubric.dao.impl.RubricDAOImpl;
 import org.rubric.domain.Rubric;
 import org.rubric.service.CrudService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class RubricServiceImpl implements CrudService<Rubric> {
-    private final CrudDAO<Rubric> rubricDAO;
-
-    public RubricServiceImpl() {
-        rubricDAO = new RubricDAOImpl();
-    }
-
+    CrudDAO<Rubric> rubricDAO;
 
     @Override
     public void save(Rubric rubric) {

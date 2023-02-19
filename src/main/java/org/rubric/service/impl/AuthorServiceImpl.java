@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AuthorServiceImpl implements CrudService<Author> {
+
     CrudDAO<Author> authorDAO;
 
     @Override

@@ -1,19 +1,21 @@
 package org.rubric.service.impl;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.rubric.dao.CrudDAO;
 import org.rubric.dao.impl.MatchingAdDAOImpl;
 import org.rubric.domain.MatchingAd;
 import org.rubric.service.CrudService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class MatchingAdServiceImpl implements CrudService<MatchingAd> {
-    private final CrudDAO<MatchingAd> matchingAdDAO;
-
-    public MatchingAdServiceImpl() {
-        this.matchingAdDAO = new MatchingAdDAOImpl();
-    }
-
+    CrudDAO<MatchingAd> matchingAdDAO;
 
     @Override
     public void save(MatchingAd matchingAd) {

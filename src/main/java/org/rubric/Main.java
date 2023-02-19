@@ -3,6 +3,7 @@ package org.rubric;
 import org.rubric.config.ConfigApp;
 import org.rubric.dao.CrudDAO;
 import org.rubric.dao.EmailDAO;
+import org.rubric.dao.impl.AdDAOImpl;
 import org.rubric.dao.impl.EmailDAOImpl;
 import org.rubric.domain.*;
 import org.rubric.service.AdService;
@@ -24,53 +25,6 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ConfigApp.class);
-
-        CrudService<Author> authorService = context.getBean(AuthorServiceImpl.class);
-
-        System.out.println();
-
-/*      Email email = Email
-                .builder()
-                .email("vovawestland@gmail.com")
-                .build();
-
-        Email email2 = Email
-                .builder()
-                .email("vfsdfds@gmail.com")
-                .build();
-
-        Address address = Address
-                .builder()
-                .city("Dortmund")
-                .build();
-
-        CrudService<Rubric> rubricService = new RubricServiceImpl();
-
-        Author author = Author
-                .builder()
-                .name("Andrey")
-                .email(email)
-                .address(address)
-                .phones(List.of(Phone.builder().phoneNumber("38908900").build()))
-                .build();
-
-        Author author2 = Author
-                .builder()
-                .name("Andrey")
-                .email(email2)
-                .phones(List.of(Phone.builder().phoneNumber("3890fsd0").build()))
-                .build();
-
-        Rubric rubric = Rubric
-                .builder()
-                .name("websites")
-                .build();
-
-        authorService.save(author);
-        authorService.save(author2);
-        rubricService.save(rubric);*/
 
 /*        AdService adService = new AdServiceImpl();
 
@@ -104,11 +58,60 @@ public class Main {
                 .build();
 
       */
+/*        Address address = Address
+                .builder()
+                .city("Dortmund")
+                .build();
 
-        EmailDAO emailDAO = new EmailDAOImpl();
-        AdService adService = new AdServiceImpl();
-//        emailDAO.sendEmails(adService.findById(1));
+        Email email2 = Email
+                .builder()
+                .emailAddress("america@gmail.com")
+                .build();
 
+        Author author = Author
+                .builder()
+                .name("Richard")
+                .email(email2)
+                .address(address)
+                .phones(List.of(Phone.builder().phoneNumber("+49159064").build()))
+                .build();
 
+        Rubric rubric = Rubric
+                .builder()
+                .name("autos")
+                .build();*/
+
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ConfigApp.class);
+
+/*        CrudService<Author> authorService = context.getBean(AuthorServiceImpl.class);
+
+        CrudService<Rubric> rubricService = context.getBean(RubricServiceImpl.class);*/
+
+/*        rubricService.save(rubric);
+
+        authorService.save(author);*/
+
+ /*       Ad ad = Ad.builder()
+                .name("Car")
+                .date(LocalDate.now())
+                .text("Hello1 it is car")
+                .price(BigDecimal.valueOf(300))
+                .author(authorService.findById(1))
+                .rubric(rubricService.findById(1))
+                .build();*/
+
+        AdService adService = context.getBean(AdServiceImpl.class);
+
+/*        MatchingAd madAd = MatchingAd.builder()
+                .title("Hello1")
+                .rubric(rubricService.findById(1))
+                .author(authorService.findById(1))
+                .priceFrom(new BigDecimal(100))
+                .priceTo(new BigDecimal(500))
+                .build();
+        CrudService<MatchingAd> matchingAdService = context.getBean(MatchingAdServiceImpl.class);*/
+
+        EmailDAO emailDAO = context.getBean(EmailDAOImpl.class);
+        emailDAO.sendEmails(adService.findById(1));
     }
 }

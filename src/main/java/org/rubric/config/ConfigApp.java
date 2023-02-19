@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 @Configuration
 @ComponentScan(basePackages = {"org.rubric.dao", "org.rubric.service"})
 @EnableTransactionManagement
-//@EnableAspectJAutoProxy(proxyTargetClass = true)
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class ConfigApp {
 
     @Bean
